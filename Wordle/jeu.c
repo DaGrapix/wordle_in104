@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#DEFINE dico "dico.txt"
+#DEFINE dico "ods4.txt"
 
 
 int main(){

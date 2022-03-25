@@ -18,7 +18,7 @@ void free_list(struct word_list *list){
     }
 }
 
-char **load_dic(char* fname, unsigned int* size){
+char **load_dic(char* fname, unsigned int* size, int taille_mot){
     char **words_array;
     unsigned int word_count = 0;
     struct word_list *old_list = NULL;
@@ -39,19 +39,21 @@ char **load_dic(char* fname, unsigned int* size){
             return(NULL);
         }
 
-        char* word_cpy = malloc(( 1 + strlen(buffer)) * sizeof(char));
-        if (word_cpy==NULL){
-            printf("Probleme de creation de word_cpy");
-            fclose(in);
-            return(NULL);
+        if (strlen(buffer)==taille_mot){
+            char* word_cpy = malloc(( 1 + strlen(buffer)) * sizeof(char));
+            if (word_cpy==NULL){
+                printf("Probleme de creation de word_cpy");
+                fclose(in);
+                return(NULL);
+            }
+
+            strcpy(word_cpy, buffer);
+            new_list->word = word_cpy;
+            new_list->next = old_list;
+            old_list = new_list;
+            word_count++;
         }
-
-        strcpy(word_cpy, buffer);
-        new_list->word = word_cpy;
-        new_list->next = old_list;
-        old_list = new_list;
-        word_count++;
-
+        
         fscanf(in, "%s", buffer);
     }
     fclose(in);

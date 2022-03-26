@@ -5,12 +5,14 @@
 #include "load_dic.h"
 
 int main(){
-    char mot[6] = "BANANE";
-    //printf("%s\n", mot);
-    //char fichier[8] = "ods4.txt";
-    char fichier[10] = "french.txt";
-    unsigned int taille;
-    char** tableau = load_dic(fichier, &taille);
-    printf("%d\n", find_word_dicho(tableau, mot, 0, taille - 1));
-
+    char dico_name[8]="ods4.txt";
+    int size;
+    char** list = read_dico(dico_name, &size, 6);
+    for (int i = 0; i<= size-1; i++){
+        printf("%s\n", list[i]);
+    }
+    
+    char word[6]="BANANE";
+    bool OK = find_word_dicho(list, word, 0, size-1);
+    printf("%d\n", OK);
 }

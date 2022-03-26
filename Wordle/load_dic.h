@@ -1,8 +1,7 @@
 #ifndef LOAD_DIC_H
 #define LOAD_DIC_H
 
-char **load_dic(char *fname, unsigned int *size);
-void free_list(struct word_list* list);
+char** read_dico(char* fname, int* size, int word_length);
 bool find_word_dicho(char **words, char *word, int left, int right);
 
 

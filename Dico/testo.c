@@ -24,11 +24,10 @@ char** read_dico(char* fname, int* size, int taille_mot){
             new_list->mot = mot;
             new_list->next = old_list;
             old_list = new_list;
-
+            word_count++;
         }
 
         fscanf(in, "%s", buffer);
-        word_count++;
     }
 
     *size = word_count;
@@ -36,8 +35,9 @@ char** read_dico(char* fname, int* size, int taille_mot){
 
     while (word_count != 0){
         liste[word_count] = old_list->mot;
-        struct mot_list* tmp = old_list->next;
+        struct mot_liste* tmp = old_list->next;
         old_list = tmp;
+        word_count--;
     }
 
     return(liste);
@@ -45,11 +45,13 @@ char** read_dico(char* fname, int* size, int taille_mot){
 
 int main(){
     char dico_name[8]="ods4.txt";
+    //char dico_name[8]="test.txt";
     int size;
-    printf("%s", dico_name);
-    char** liste = read_dico(dico_name, &size, 5);
+    //printf("%s\n", dico_name);
+    char** liste = read_dico(dico_name, &size, 3);
     while (size!=0){
         printf("%s", liste[size]);
         size--;
     }
+   //printf("%s", liste[0]);
 }

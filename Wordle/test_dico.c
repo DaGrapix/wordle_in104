@@ -11,7 +11,7 @@ int main(){
     char** list = read_dico(dico_name, &size, 6);
     //char** list = load_file(dico_name, &size);
     for (int i = 0; i<= size-1; i++){
-        list[i][size]='\0';
+        //list[i][size]='\0';
         //printf("%c\n", list[i][size-1]);
         printf("%s\n", list[i]);
     }

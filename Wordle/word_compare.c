@@ -11,6 +11,8 @@ struct wordle_letter_list{
 };
 
 
+/*
+
 void letter_check(char* word, char* user_word){
     int len = strlen(word);
     int user_len = strlen(word);
@@ -55,4 +57,44 @@ void letter_check(char* word, char* user_word){
         }
     }
     printf("%s\n", affichage);
+}
+
+*/
+
+int letter_check(char* word, char* user_word){
+    int len = strlen(word);
+    int user_len = strlen(word);
+    if (len != user_len){
+        printf("Pas le bon nombre de lettres! Reessaye!");
+        return(1);
+    }
+
+    bool seen[len];
+    for (int i = 0; i <= len - 1; i++){
+        seen[i]=false;
+    }
+
+    char affichage[len];
+
+    for (int i = 0; i <= len - 1; i++){
+        for (int j = 0; j <= len - 1; j++){
+            if ((user_word[i]==word[j]) && (seen[j]==false)){
+                if (i==j){
+                    affichage[i] = 'O';
+                }
+                else{
+                    affichage[i] = 'Z';
+                }
+                seen[j] = true;
+            }
+            else if (j==(len - 1)){
+                affichage[i] = 'X';
+            }
+            else{
+                seen[j] = false;
+            }
+        }
+    }
+    printf("%s\n", affichage);
+    return(0);
 }

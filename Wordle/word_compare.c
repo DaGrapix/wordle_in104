@@ -90,11 +90,12 @@ int letter_check(char* word, char* user_word){
                     affichage[i] = 'Z';
                     seen[j] = true;
                 }
-                else{
+                else if (affichage[i]!='O'){
                     affichage[i] = 'X';
                 }
             }
         }
+        affichage[len] = '\0';
     }
     printf("%s\n", affichage);
     return(0);

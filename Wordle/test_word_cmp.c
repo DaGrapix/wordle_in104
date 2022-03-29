@@ -7,11 +7,11 @@
 
 
 int main(){
-    char word[6]="TRAIN";
-    char user_word[6]="TENRI";
+    char word[6]="AANNE";
+    char user_word[6]="AFJEA";
 
     int a = letter_check(word, user_word);
-    
+
     //char character = 'a';
     //printf("%d", 'a'==character);
 }

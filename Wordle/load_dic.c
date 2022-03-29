@@ -57,16 +57,6 @@ char** read_dico(char* fname, int* size, int word_length){
     return(list);
 }
 
-bool naive_dico(char **list, char *word, int size){
-    for (int i = 0; i <= size - 1; i++){
-        if (strcmp(word,list[i])==0){
-            return(true);
-        }
-    }
-    return(false);
-}
-
-
 bool find_word_dicho(char **list, char *word, int left, int right){
     int length = right-left;
     int middle = (right+left)/2;

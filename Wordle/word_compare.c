@@ -74,7 +74,7 @@ int letter_check(char* word, char* user_word){
         seen[i]=false;
     }
 
-    char affichage[len];
+    char affichage[len + 1];
 
     for (int i = 0; i <= len - 1; i++){
         if (user_word[i]==word[i]){
@@ -86,17 +86,18 @@ int letter_check(char* word, char* user_word){
     for (int i = 0; i <= len - 1; i++){
         for (int j = 0; j <= len - 1; j++){
             if (i != j){
-                if ((user_word[i]==word[j]) && (seen[j]==false)){
+                if ((user_word[i]==word[j]) && (seen[i]==false)){
                     affichage[i] = 'Z';
                     seen[j] = true;
                 }
-                else if (affichage[i]!='O'){
+                else if ((affichage[i]!='O') && (affichage[i]!='Z')){
                     affichage[i] = 'X';
                 }
             }
         }
         affichage[len] = '\0';
     }
+
     printf("%s\n", affichage);
     return(0);
 

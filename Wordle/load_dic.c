@@ -13,7 +13,7 @@ char** read_dico(char* fname, int* size, int word_length){
     struct word_list* old_list = NULL;
     int word_count = 0;
 
-    FILE* in = fopen(fname, "rb");
+    FILE* in = fopen(fname, "r");
     fscanf(in, "%s", buffer);
     while (!feof(in)){
         struct word_list* new_list = malloc(sizeof(struct word_list));
@@ -23,7 +23,7 @@ char** read_dico(char* fname, int* size, int word_length){
             }
 
         if (strlen(buffer)==word_length){
-            char* word = malloc(word_length*sizeof(char));
+            char* word = malloc((word_length+1)*sizeof(char));
             if (word==NULL){
                 fclose(in);
                 return(NULL);
@@ -31,7 +31,6 @@ char** read_dico(char* fname, int* size, int word_length){
 
             strcpy(word, buffer);
 
-            //word[word_length]='\0';
             new_list->word = word;
             new_list->next = old_list;
             old_list = new_list;
@@ -66,6 +65,7 @@ bool naive_dico(char **list, char *word, int size){
     }
     return(false);
 }
+
 
 bool find_word_dicho(char **list, char *word, int left, int right){
     int length = right-left;

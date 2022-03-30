@@ -36,6 +36,9 @@ int main(){
             "si la lettre n'est pas dans le mot, un X s'affichera.\n");
 
     printf("___________________________\n\n\n");
+
+    printf("%s\n", game_word);
+    game_word="REALS";
     while (nb_tour<6 && !gagne){
         printf("#####  TOUR %d  #####\n", nb_tour);
         scanf("%s", user_word);

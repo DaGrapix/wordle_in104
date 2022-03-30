@@ -37,8 +37,11 @@ int main(){
 
     printf("___________________________\n\n\n");
 
-    printf("%s\n", game_word);
-    game_word="REALS";
+    //TEST
+    //printf("%s\n", game_word);
+
+    //TEST
+    game_word="NOEME";
     while (nb_tour<6 && !gagne){
         printf("#####  TOUR %d  #####\n", nb_tour);
         scanf("%s", user_word);

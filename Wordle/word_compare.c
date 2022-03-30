@@ -12,11 +12,10 @@ struct wordle_letter_list{
 
 
 /*
-
 void letter_check(char* word, char* user_word){
-    int len = strlen(word);
+    int game_len = strlen(word);
     int user_len = strlen(word);
-    if (len != user_len){
+    if (game_len != user_len){
         printf("Pas le bon nombre de lettres! Reessaye!");
     }
 
@@ -27,7 +26,7 @@ void letter_check(char* word, char* user_word){
     old_list->next = NULL;
     old_list->character = word[0];
     old_list->seen = false;
-    for (int i = 1; len-1; i++){
+    for (int i = 1; game_len-1; i++){
         struct wordle_letter_list* new_list = malloc(sizeof(struct wordle_letter_list));
         new_list->next = old_list;
         new_list->character = word[i];
@@ -36,9 +35,9 @@ void letter_check(char* word, char* user_word){
     }
     p->next = old_list;
 
-    char affichage[len];
-    for (int i = 0; i <= len - 1; i++){
-        for (int j = 0; j <= len - 1; j++){
+    char affichage[game_len];
+    for (int i = 0; i <= game_len - 1; i++){
+        for (int j = 0; j <= game_len - 1; j++){
             if ((user_word[i]==p->character) && (p->character==false)){
                 if (i==j){
                     affichage[i] = 'O';
@@ -48,7 +47,7 @@ void letter_check(char* word, char* user_word){
                 }
                 p->seen = true;
             }
-            else if (j==(len - 1)){
+            else if (j==(game_len - 1)){
                 affichage[i] = 'X';
             }
             else{
@@ -58,33 +57,32 @@ void letter_check(char* word, char* user_word){
     }
     printf("%s\n", affichage);
 }
-
 */
 
 int letter_check(char* game_word, char* user_word){
-    int len = strlen(game_word);
+    int game_len = strlen(game_word);
     int user_len = strlen(game_word);
-    if (len != user_len){
-        printf("Pas le bon nombre de lettres! Reessaye!");
+    if (game_len != user_len){
+        printf("Erreur, pas le bon nombre de lettres");
         return(1);
     }
 
-    bool seen[len];
-    for (int i = 0; i <= len - 1; i++){
+    bool seen[game_len];
+    for (int i = 0; i <= game_len - 1; i++){
         seen[i]=false;
     }
 
-    char affichage[len + 1];
+    char affichage[game_len + 1];
 
-    for (int i = 0; i <= len - 1; i++){
+    for (int i = 0; i <= game_len - 1; i++){
         if (user_word[i]==game_word[i]){
             seen[i] = true;
             affichage[i] = 'O';
         }
     }
 
-    for (int i = 0; i <= len - 1; i++){
-        for (int j = 0; j <= len - 1; j++){
+    for (int i = 0; i <= game_len - 1; i++){
+        for (int j = 0; j <= game_len - 1; j++){
             if (i != j){
                 if ((user_word[i]==game_word[j]) && (seen[i]==false)){
                     affichage[i] = 'Z';
@@ -95,7 +93,7 @@ int letter_check(char* game_word, char* user_word){
                 }
             }
         }
-        affichage[len] = '\0';
+        affichage[game_len] = '\0';
     }
 
     printf("%s\n", affichage);

@@ -61,9 +61,9 @@ void letter_check(char* word, char* user_word){
 
 */
 
-int letter_check(char* word, char* user_word){
-    int len = strlen(word);
-    int user_len = strlen(word);
+int letter_check(char* game_word, char* user_word){
+    int len = strlen(game_word);
+    int user_len = strlen(game_word);
     if (len != user_len){
         printf("Pas le bon nombre de lettres! Reessaye!");
         return(1);
@@ -77,7 +77,7 @@ int letter_check(char* word, char* user_word){
     char affichage[len + 1];
 
     for (int i = 0; i <= len - 1; i++){
-        if (user_word[i]==word[i]){
+        if (user_word[i]==game_word[i]){
             seen[i] = true;
             affichage[i] = 'O';
         }
@@ -86,9 +86,9 @@ int letter_check(char* word, char* user_word){
     for (int i = 0; i <= len - 1; i++){
         for (int j = 0; j <= len - 1; j++){
             if (i != j){
-                if ((user_word[i]==word[j]) && (seen[i]==false)){
+                if ((user_word[i]==game_word[j]) && (seen[i]==false)){
                     affichage[i] = 'Z';
-                    seen[j] = true;
+                    seen[i] = true;
                 }
                 else if ((affichage[i]!='O') && (affichage[i]!='Z')){
                     affichage[i] = 'X';

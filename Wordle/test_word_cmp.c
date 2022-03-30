@@ -7,10 +7,10 @@
 
 
 int main(){
-    char word[6]="AANNE";
+    char game_word[6]="AANNE";
     char user_word[6]="AFJEA";
 
-    int a = letter_check(word, user_word);
+    int a = letter_check(game_word, user_word);
 
     //char character = 'a';
     //printf("%d", 'a'==character);

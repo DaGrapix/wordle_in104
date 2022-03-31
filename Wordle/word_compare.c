@@ -82,10 +82,14 @@ int letter_check(char* game_word, char* user_word){
     }
 
     for (int i = 0; i <= game_len - 1; i++){
+        printf("%d\n",seen[i]);
+     }
+
+    for (int i = 0; i <= game_len - 1; i++){
         for (int j = 0; j <= game_len - 1; j++){
             if (i != j){
                 //i ou j dans les seen
-                if ((user_word[i]==game_word[j]) && (seen[j]==false)){
+                if ((user_word[i]==game_word[j]) && (seen[j]==false) && (seen[i]==false)){
                     affichage[i] = 'Z';
                     seen[j] = true;
                 }

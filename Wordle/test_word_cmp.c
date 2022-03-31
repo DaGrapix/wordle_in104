@@ -7,8 +7,8 @@
 
 
 int main(){
-    char game_word[6]="AANNE";
-    char user_word[6]="AFJEA";
+    char game_word[6]="NOEME";
+    char user_word[6]="NOELS";
 
     int a = letter_check(game_word, user_word);
 

@@ -115,7 +115,7 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
                     return(false);
                 }
 
-    }
-    
+            }
+        }
     return true;
 }

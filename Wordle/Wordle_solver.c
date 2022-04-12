@@ -4,7 +4,7 @@
 #include <string.h>
 #include <math.h>
 
-
+/*
 char* dec_to_ternary(int j, int word_size){
     char remainder_list[word_size];
     //Initialistation a liste nulle
@@ -74,13 +74,48 @@ char* entropy(char* word, char* word_state, int actual_list_size, char** actual_
         }
     }
 }
-
+*/
 bool is_similar(char* word, char* word_state, char* list_word, int word_size){
+    int count;
     bool seen[word_size];
     for (int i = 0; i <= word_size - 1; i++){
         seen[i] = 0;
     }
+    int r=0;
     for (int j = 0; j <= word_size - 1;j++){
-    
+        if(word_state[j]=='O'){
+            if(word[j]==list_word[j]){
+                seen[j]=1;
+            }
+            else{
+                return false;
+            }
+        }
+        else if(word_state[j]=='Z'){
+            count=0;
+            for(int i= 0;i <= word_size - 1; i++){
+                
+                if(word[j]==list_word[i] && i!=j){
+                    seen[i]=1;
+                }
+                else{
+                    count++;
+                
+                    if(count==word_size){
+                        return false;
+                    }
+                }
+        
+            }
+            
+        }
+        else if(word_state[j]=='X'){
+            for(int i= 0;i <= word_size - 1; i++){
+                if(word[j]==list_word[i] && seen[i]==0 && seen[j]==0){
+                    return(false);
+                }
+
     }
+    
+    return true;
 }

@@ -81,7 +81,7 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     for (int i = 0; i <= word_size - 1; i++){
         seen[i] = 0;
     }
-    int r=0;
+
     for (int j = 0; j <= word_size - 1;j++){
         if(word_state[j]=='O'){
             if(word[j]==list_word[j]){
@@ -117,5 +117,6 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
 
             }
         }
+    }
     return true;
 }

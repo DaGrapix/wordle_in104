@@ -32,7 +32,6 @@ char* dec_to_ternary(int number, int word_size){
 }
 
 
-/*
 
 char* best_word(int word_size, char** list, int list_size, char** actual_list, int actual_list_size){
     double probbability;

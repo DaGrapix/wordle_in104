@@ -34,7 +34,7 @@ char* dec_to_ternary(int number, int word_size){
 
 
 char* best_word(int word_size, char** list, int list_size, char** actual_list, int actual_list_size){
-    double probbability;
+    double probability;
     double information;
     double* entropy_list[list_size + 1];
     char word[word_size + 1];
@@ -42,15 +42,15 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
 
     for (int i = 0; i<= list_size - 1; i++){
         word = list[i];
-        entropy_list[i] = entropy(word, word_state, actual_list_size, actual_list, word_size);
-        printf("%f\n", (float)(i)/list_size);
+        entropy_list[i] = entropy(word, actual_list_size, actual_list, word_size);
+        //printf("%f\n", (float)(i)/list_size);
     }
 
-    int entropy=entropy_list[0];
+    double max_entropy=entropy_list[0];
     char best_guess[word_size + 1] = list[0];
     for (int i = 0; i<= list_size - 1; i++){
-        if (entropy_list[i] > entropy){
-            entropy = entropy_list;
+        if (entropy_list[i] > max_entropy){
+            max_entropy = entropy_list[i];
             best_guess = list[i];
         }
     }
@@ -58,7 +58,7 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
 }
 
 
-char* entropy(char* word, char* word_state, int actual_list_size, char** actual_list, int word_size){
+double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
     int occurence = 0;
     double probability = 0;
     double entropy = 0;
@@ -70,10 +70,11 @@ char* entropy(char* word, char* word_state, int actual_list_size, char** actual_
             if (is_similar(word, word_state, temp_word, word_size)==true){
                 occurence++;
             }
-            probability=occurence/actual_list_size;
-            entropy = entropy + probability*log(1/probability)/log(2);
         }
+        probability=occurence/actual_list_size;
+        entropy = entropy + probability*log(1/probability)/log(2);
     }
+    return(entropy);
 }
 
 bool is_similar(char* word, char* word_state, char* list_word, int word_size){

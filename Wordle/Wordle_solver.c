@@ -4,34 +4,35 @@
 #include <string.h>
 #include <math.h>
 
-/*
-char* dec_to_ternary(int j, int word_size){
-    char remainder_list[word_size];
+char* dec_to_ternary(int number, int word_size){
+    char* configuration = malloc((word_size+1)*sizeof(char));
     //Initialistation a liste nulle
-    for (int i = 0; i <= word_size - 1; word_size++){
-        remainder_list[i]='X';
+    for (int i = 0; i <= word_size - 1; i++){
+        configuration[i]='X';
     }
-    int remainder = 0;
-    int quotient = j;
-    int step = 0;
-    while (quotient != 0){
-        quotient = quotient/3;
-        remainder = quotient%3;
-        if (remainder==0){
-            remainder_list[word_size-1-step]='X';
+    //return(configuration);
+    int remainder = number;
+    int power = 0;
+    while (remainder != 0){
+        power = 0;
+        while (pow(3,power) <= remainder){
+            power++;
         }
-        else if (remainder==1){
-            remainder_list[word_size-1-step]='Z';
+        power--;
+        if (2*pow(3, power) <= remainder){
+            configuration[power] = 'O';
+            remainder = remainder - 2*pow(3, power);
         }
         else{
-            remainder_list[word_size-1-step]='O';
+            configuration[power] = 'Z';
+            remainder = remainder - pow(3, power);
         }
-        step++;
     }
-
-    return(remainder_list);
-
+    return(configuration);
 }
+
+
+/*
 
 char* best_word(int word_size, char** list, int list_size, char** actual_list, int actual_list_size){
     double probbability;
@@ -43,6 +44,7 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
     for (int i = 0; i<= list_size - 1; i++){
         word = list[i];
         entropy_list[i] = entropy(word, word_state, actual_list_size, actual_list, word_size);
+        printf("%f\n", (float)(i)/list_size);
     }
 
     int entropy=entropy_list[0];
@@ -74,7 +76,7 @@ char* entropy(char* word, char* word_state, int actual_list_size, char** actual_
         }
     }
 }
-*/
+
 bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     int count;
     bool seen[word_size];
@@ -126,3 +128,5 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
         return true;
     }
 }
+
+*/

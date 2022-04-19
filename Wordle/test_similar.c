@@ -6,8 +6,8 @@
 
 int main(){
     char list_word[6]="PARIS";
-    char word[6]="RRREP";
-    char arrangement[6]="XXOXZ";
+    char word[6]="RREEP";
+    char arrangement[6]="ZXXXZ";
     bool OK = is_similar(word,arrangement,list_word,5);
     printf("%d\n", OK);
 }

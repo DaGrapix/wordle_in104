@@ -133,5 +133,6 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
         }
     }
     free(entropy_list);
+    free(best_guess);
     return(best_guess);
 }

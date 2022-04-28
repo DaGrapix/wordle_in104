@@ -88,6 +88,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
     double probability;
     double word_entropy = 0;
     char *temp_word;
+    //double test;
     for (int j = 0; j <= pow(3, word_size)-1; j++){
         occurence = 0;
         probability = 0;
@@ -99,7 +100,10 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
             }
         }
         probability=((double)occurence)/actual_list_size;
-        word_entropy = word_entropy + probability*(log(1/probability)/log(2));
+        //test = log(1/probability)/log(2);
+        if (probability != 0.0){
+            word_entropy = word_entropy + probability*(log(1/probability)/log(2));
+        }
     }
     return(word_entropy);
 }
@@ -119,7 +123,7 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
     }
 
     //On trouve le mot avec la plus grande entropie
-    double max_entropy=entropy_list[0];
+    double max_entropy = entropy_list[0];
     char *best_guess = malloc((word_size+1)*sizeof(char));
     strcpy(best_guess, list[0]);
     for (int i = 0; i<= list_size - 1; i++){

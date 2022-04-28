@@ -35,6 +35,8 @@ int main(){
 
     srand(time(NULL));
     char dico_name[8]="ods4.txt";
+    //char dico_name[10]="french.txt";
+
     int word_length = 5;
     int size;
     char** list = read_dico(dico_name, &size, word_length);

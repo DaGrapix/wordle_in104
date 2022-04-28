@@ -96,8 +96,8 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
                 occurence++;
             }
         }
-        probability=occurence/actual_list_size;
-        entropy = entropy + probability*log(1/probability)/log(2);
+        probability=((double)occurence)/actual_list_size;
+        entropy = entropy + probability*(log(1/probability)/log(2));
     }
     return(entropy);
 }

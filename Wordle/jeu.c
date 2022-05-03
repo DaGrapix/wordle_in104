@@ -10,40 +10,64 @@
 
 
 int main(){
+    printf("                                       ##############################\n");
+    printf("                                       #####       WORDLE       #####\n");
+    printf("                                       ##############################\n\n");
+
+    printf("#############################################  REGLES DU JEU  #############################################\n");
+    printf("___________________________________________________________________________________________________________\n");
+    printf("Un mot a ete choisi au hasard. Ton role est de retrouver ce mot en un certain nombre de tours.\n");
+    printf("Tu devras donner un mot a chaque tour.\nPour chacune des lettres de ce mot,\n"
+            "si cette lettre est presente dans le mot choisi et est a la bonne place, un O s'affichera à cette place;\n"
+            "Si c'est une lettre qui est dans le mot mais à la mauvaise place, un Z s'affichera;\n"
+            "si la lettre n'est pas dans le mot, un X s'affichera.\n");
+    printf("___________________________________________________________________________________________________________\n\n\n");
+
+    int nb_tour;
+    int word_length;
+
+    printf("En combien de tours veux tu jouer?\n");
+    scanf("%d", &nb_tour);
+    while((nb_tour>50) || (nb_tour<=0)){
+        printf("Il faut un nombre entre 1 et 50! Réeessaie!\n");
+        scanf("%d", &nb_tour);
+    }
+
+    printf("\n\n");
+
+    printf("Avec combien de lettres veux tu jouer?\n");
+    scanf("%d", &word_length);
+    while((word_length>10) || (word_length<=0)){
+        printf("Il faut un nombre entre 1 et 10! Réeessaie!\n");
+        scanf("%d", &word_length);
+    }
+
+    printf("\n\n");
+
+    printf("Jeu en %d tours, pour des mots de %d lettres\n\n", nb_tour, word_length);
+
+
     srand(time(NULL));
     char dico_name[8]="ods4.txt";
     //char dico_name[10]="french.txt";
 
-    int word_length = 5;
+    
     int size;
     char** list = read_dico(dico_name, &size, word_length);
 
     char* game_word=random_word(list, size);
 
-    int nb_tour = 0;
+    int tour_counter = 0;
     bool gagne = false;
     char user_word[2*size+1];
-    //
-
-    printf("#####  WORDLE  #####\n\n");
-    printf("___________________________\n");
-    printf("#####  REGLES DU JEU  #####\n");
-
-    printf("Un mot a ete choisi au hasard.\n Ton role est de retrouver ce mot en %d tours.\n", nb_tour);
-    printf("Tu devras donner un mot a chaque tour.\n Pour chacune des lettres de ce mot,\n"
-            "si cette lettre est la presente dans le mot cible et a la bonne place, un O s'affichera;\n"
-            "Si c'est une lettre qui est dans le mot mais à la mauvaise place, un Z s'affichera;\n"
-            "si la lettre n'est pas dans le mot, un X s'affichera.\n");
-
-    printf("___________________________\n\n\n");
 
     //TEST
     //printf("%s\n", game_word);
 
     //TEST
     //game_word="NOEME";
-    while (nb_tour<6 && !gagne){
-        printf("#####  TOUR %d  #####\n", nb_tour);
+    while (tour_counter<(nb_tour + 1) && !gagne){
+        printf("#####  TOUR %d  #####\n", tour_counter);
         scanf("%s", user_word);
         if (strcmp(user_word, game_word)==0){
             printf("C'est gagné!\n\n");
@@ -53,11 +77,11 @@ int main(){
             printf("Pas le bon nombre de lettres, Reessaye!\n\n");
         }
         else if (find_word_dicho(list, user_word, 0, size-1)==false){
-            printf("Ce n'est pas un mot du dico, Reessaye!\n\n");
+            printf("Ce n'est pas un mot du dico, Reessaie!\n\n");
         }
         else{
             letter_check(game_word, user_word);
-            nb_tour++;
+            tour_counter++;
             printf("\n\n");
         }
     }

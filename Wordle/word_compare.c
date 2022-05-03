@@ -82,7 +82,7 @@ int letter_check(char* game_word, char* user_word){
     }
 
     for (int i = 0; i <= game_len - 1; i++){
-        printf("%d\n",seen[i]);
+        //printf("%d\n",seen[i]);
      }
 
     for (int i = 0; i <= game_len - 1; i++){

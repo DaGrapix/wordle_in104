@@ -2,12 +2,13 @@
 
 int main(){
     float temp;
-    clock.t t1, t2;
-    t1 = clock()
+    clock_t begin = clock();
 
-    t2 = clock()
+    //Code
 
-    temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-    print("%f\n", temps);
+    clock_t end = clock();
+
+    unsigned long temps = (float)(end-begin)/CLOCKS_PER_SEC;
+    print("%ld\n", temps);
     return 0;
 }

@@ -115,6 +115,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
 
 //Problemes....
 double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
+    //Liste qui verifie si le mot que l'on compare a deja ete compare positivement
     bool* partition = malloc(actual_list_size*sizeof(bool));
     for (int i = 0; i <= actual_list_size - 1; i++){
             partition[i] = false;

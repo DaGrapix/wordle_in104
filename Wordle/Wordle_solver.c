@@ -4,6 +4,7 @@
 #include <string.h>
 #include <math.h>
 
+//Convertit un nombre decimal en ternaire
 char* dec_to_ternary(int number, int word_size){
     char* configuration = malloc((word_size+1)*sizeof(char));
     //Initialistation a liste nulle
@@ -31,6 +32,7 @@ char* dec_to_ternary(int number, int word_size){
     return(configuration);
 }
 
+//Verifie si deux mots sont compatibles avec une configuration donee
 bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     int count;
     bool seen[word_size];
@@ -111,7 +113,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
 */
 
 
-//IDEE NULLE OU A TRAVAILLER
+//Problemes....
 double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
     bool* partition = malloc(actual_list_size*sizeof(bool));
     for (int i = 0; i <= actual_list_size - 1; i++){
@@ -121,7 +123,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
     double probability;
     double word_entropy = 0;
     char *temp_word;
-    //double test;
+    double somme = -actual_list_size;
     for (int j = 0; j <= pow(3, word_size)-1; j++){
         occurence = 0;
         probability = 0;
@@ -130,11 +132,11 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
             temp_word=actual_list[i];
             if ((partition[i]==false) && (is_similar(word, word_state, temp_word, word_size)==true)){
                 occurence++;
+                somme++;
                 partition[i]=true;
             }
         }
         probability=((double)occurence)/actual_list_size;
-        //test = log(1/probability)/log(2);
         if (probability != 0.0){
             word_entropy = word_entropy + probability*(log(1/probability)/log(2));
         }
@@ -143,7 +145,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
     return(word_entropy);
 }
 
-
+//Trouve le mot qui maximise l'entropie
 char* best_word(int word_size, char** list, int list_size, char** actual_list, int actual_list_size){
     double probability;
     double information;

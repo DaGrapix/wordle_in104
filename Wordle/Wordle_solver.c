@@ -124,7 +124,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
     double probability;
     double word_entropy = 0;
     char *temp_word;
-    double somme = -actual_list_size;
+    //double somme = - actual_list_size;
     for (int j = 0; j <= pow(3, word_size)-1; j++){
         occurence = 0;
         probability = 0;
@@ -133,7 +133,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
             temp_word=actual_list[i];
             if ((partition[i]==false) && (is_similar(word, word_state, temp_word, word_size)==true)){
                 occurence++;
-                somme++;
+                //somme++;
                 partition[i]=true;
             }
         }

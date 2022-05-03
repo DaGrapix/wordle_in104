@@ -22,11 +22,11 @@ int main(){
 
 
     srand(time(NULL));
-    //char dico_name[32]="petit_dico.txt";
+    char dico_name[32]="petit_dico.txt";
     //char dico_name[32]="french.txt";
     //char dico_name[32]="ods4.txt";
     //char dico_name[32]="micro_dico.txt";
-    char dico_name[32]="dictionnaire_frequence.txt";
+    //char dico_name[32]="dictionnaire_frequence.txt";
     int word_length = 5;
     int size;
     char** list = read_dico(dico_name, &size, word_length);

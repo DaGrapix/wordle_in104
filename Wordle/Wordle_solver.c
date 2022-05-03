@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include "random_word.h"
 
 //Convertit un nombre decimal en ternaire
 char* dec_to_ternary(int number, int word_size){
@@ -139,7 +140,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
         }
         probability=((double)occurence)/actual_list_size;
         if (probability != 0.0){
-            word_entropy = word_entropy + probability*(log(1/probability)/log(2));
+            word_entropy = word_entropy - probability*(log(probability)/log(2));
         }
     }
     free(partition);
@@ -176,5 +177,11 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
     }
     free(entropy_list);
     //free(best_guess);
+    return(best_guess);
+}
+
+char* naive_solver(int word_size, char** actual_list, int actual_list_size){
+    char* best_guess = malloc((word_size+1)*sizeof(char));
+    best_guess = random_word(actual_list, actual_list_size);
     return(best_guess);
 }

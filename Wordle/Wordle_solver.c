@@ -83,7 +83,7 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     }
 }
 
-
+/*
 double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
     int occurence;
     double probability;
@@ -108,9 +108,10 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
     }
     return(word_entropy);
 }
+*/
 
-/*
-//IDEE NULLE
+
+//IDEE NULLE OU A TRAVAILLER
 double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
     bool* partition = malloc(actual_list_size*sizeof(bool));
     for (int i = 0; i <= actual_list_size - 1; i++){
@@ -141,7 +142,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
     free(partition);
     return(word_entropy);
 }
-*/
+
 
 char* best_word(int word_size, char** list, int list_size, char** actual_list, int actual_list_size){
     double probability;

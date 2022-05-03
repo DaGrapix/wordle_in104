@@ -163,6 +163,9 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
     char *best_guess = malloc((word_size+1)*sizeof(char));
     strcpy(best_guess, list[0]);
     for (int i = 0; i<= list_size - 1; i++){
+        
+        //printf("%s  :  %f\n", list[i], entropy_list[i]);
+
         if (entropy_list[i] > max_entropy){
             max_entropy = entropy_list[i];
             strcpy(best_guess, list[i]);

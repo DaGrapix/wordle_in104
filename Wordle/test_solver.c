@@ -30,7 +30,18 @@ int main(){
     int word_length = 5;
     int size;
     char** list = read_dico(dico_name, &size, word_length);
-    char* bestWord = best_word(word_length, list, size, list, size);
+    char word[6]="PARIS";
+    char word_state[6]="ZXXXZ";
+    for (int j = 0; size - 1; j++){
+        for (int i = 1; size - 1; i++){
+            if (is_similar(word, word_state,list[i], word_length)==1){
+                printf("%s ", list[i]);
+                printf("est compatible pour la combinaison ");
+                printf("%s", word_state);
+            }
+        }
+    }
+    //char* bestWord = best_word(word_length, list, size, list, size);
 
-    printf("%s\n", bestWord);
+    //printf("%s\n", bestWord);
 }

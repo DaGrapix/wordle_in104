@@ -38,7 +38,7 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     int count;
     bool seen[word_size];
     for (int i = 0; i <= word_size - 1; i++){
-        seen[i] = 0;
+        seen[i] = false;
     }
 
     for (int j = 0; j <= word_size - 1;j++){
@@ -117,7 +117,7 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
 //Problemes....
 double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
     //Liste qui verifie si le mot que l'on compare a deja ete compare positivement
-    bool* partition = malloc(actual_list_size*sizeof(bool));
+    bool partition[actual_list_size];
     for (int i = 0; i <= actual_list_size - 1; i++){
             partition[i] = false;
         }

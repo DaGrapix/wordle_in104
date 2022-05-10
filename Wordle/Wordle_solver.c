@@ -87,7 +87,7 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
 }
 
 /*
-double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
+double entropy(char* word, int current_list_size, char** current_list, int word_size){
     int occurence;
     double probability;
     double word_entropy = 0;
@@ -97,13 +97,13 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
         occurence = 0;
         probability = 0;
         char* word_state = dec_to_ternary(j, word_size);
-        for (int i = 0; i <= actual_list_size - 1; i++){
-            temp_word=actual_list[i];
+        for (int i = 0; i <= current_list_size - 1; i++){
+            temp_word=current_list[i];
             if (is_similar(word, word_state, temp_word, word_size)==true){
                 occurence++;
             }
         }
-        probability=((double)occurence)/actual_list_size;
+        probability=((double)occurence)/current_list_size;
         //test = log(1/probability)/log(2);
         if (probability != 0.0){
             word_entropy = word_entropy + probability*(log(1/probability)/log(2));
@@ -115,40 +115,40 @@ double entropy(char* word, int actual_list_size, char** actual_list, int word_si
 
 
 //Problemes....
-double entropy(char* word, int actual_list_size, char** actual_list, int word_size){
+double entropy(char* word, int current_list_size, char** current_list, int word_size){
     //Liste qui verifie si le mot que l'on compare a deja ete compare positivement
-    bool partition[actual_list_size];
-    for (int i = 0; i <= actual_list_size - 1; i++){
+    bool partition[current_list_size];
+    for (int i = 0; i <= current_list_size - 1; i++){
             partition[i] = false;
         }
     int occurence;
     double probability;
     double word_entropy = 0;
     char *temp_word;
-    //double somme = - actual_list_size;
+    //double somme = - current_list_size;
     for (int j = 0; j <= pow(3, word_size)-1; j++){
         occurence = 0;
         probability = 0;
         char* word_state = dec_to_ternary(j, word_size);
-        for (int i = 0; i <= actual_list_size - 1; i++){
-            temp_word=actual_list[i];
+        for (int i = 0; i <= current_list_size - 1; i++){
+            temp_word=current_list[i];
             if ((partition[i]==false) && (is_similar(word, word_state, temp_word, word_size)==true)){
                 occurence++;
                 //somme++;
                 partition[i]=true;
             }
         }
-        probability=((double)occurence)/actual_list_size;
+        probability=((double)occurence)/current_list_size;
         if (probability != 0.0){
             word_entropy = word_entropy - probability*(log(probability)/log(2));
         }
     }
-    free(partition);
+    //free(partition);
     return(word_entropy);
 }
 
 //Trouve le mot qui maximise l'entropie
-char* best_word(int word_size, char** list, int list_size, char** actual_list, int actual_list_size){
+char* best_word(int word_size, char** list, int list_size, char** current_list, int current_list_size){
     double probability;
     double information;
     double* entropy_list = malloc(list_size*sizeof(double));
@@ -158,7 +158,7 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
     //Creation de la liste des entropies de chaque mot
     for (int i = 0; i<= list_size - 1; i++){
         word = list[i];
-        entropy_list[i] = entropy(word, actual_list_size, actual_list, word_size);
+        entropy_list[i] = entropy(word, current_list_size, current_list, word_size);
         printf("%f\n", 100*(float)(i)/list_size);
     }
 
@@ -180,8 +180,8 @@ char* best_word(int word_size, char** list, int list_size, char** actual_list, i
     return(best_guess);
 }
 
-char* naive_solver(int word_size, char** actual_list, int actual_list_size){
+char* naive_solver(int word_size, char** current_list, int current_list_size){
     char* best_guess = malloc((word_size+1)*sizeof(char));
-    best_guess = random_word(actual_list, actual_list_size);
+    best_guess = random_word(current_list, current_list_size);
     return(best_guess);
 }

@@ -37,8 +37,8 @@ int main(){
 
     printf("Avec combien de lettres veux tu jouer?\n");
     scanf("%d", &word_length);
-    while((word_length>10) || (word_length<=0)){
-        printf("Il faut un nombre entre 1 et 10! Réeessaie!\n");
+    while((word_length>10) || (word_length<=2)){
+        printf("Il faut un nombre entre 3 et 10! Réeessaie!\n");
         scanf("%d", &word_length);
     }
 

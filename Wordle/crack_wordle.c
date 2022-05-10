@@ -11,11 +11,25 @@
 
 #include "Wordle_solver.h"
 
-void dico_resizer(int word_size, char** list, int list_size, char** current_list, int current_list_size){
-    
+//Troncage de la liste courante, par adresse
+void dico_resizer(char* word, int word_size,char* word_state, char** current_list, int* p_current_list_size){
+    char** similar_list = malloc((*p_current_list_size)*sizeof(char*));
+    int j = 0;
+    for (int i = 0; i <= *p_current_list_size - 1; i++){
+        if (is_similar(word, word_state, current_list[i], word_size)){
+            strcpy(similar_list[j], current_list[i]);
+            j++;
+        }
+    }
+    for (int i =0; i <= j; i++){
+
+    }
+    for (int i = *p_current_list_size - 1; i >= j + 1; i--){
+        free(current_list[i]);
+    }
+    current_list[j+1]=NULL;
+    *p_current_list_size = j + 1;
 }
-
-
 
 int main(){
     int nb_tour;
@@ -49,15 +63,13 @@ int main(){
     int tour_counter = 0;
     bool gagne = false;
     char user_word[2*size+1];
-    char very_best_word[word_size]
-
 
     while (tour_counter<(nb_tour) && !gagne){
         printf("#####  TOUR %d  #####\n", tour_counter);
         scanf("%s", user_word);
         scanf("%s", word_state);
         dico_resizer(user_word, word_state, current_list, current_list_size);
-        very_best_word = best_word(word_size, list, list_size, current_list, current_list_size);
+        char* very_best_word = best_word(word_size, list, list_size, current_list, current_list_size);
         printf("Le meilleur mot est %s", very_best_word);
 
         if (current_list_size==1){

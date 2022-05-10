@@ -33,12 +33,18 @@ char* dec_to_ternary(int number, int word_size){
     return(configuration);
 }
 
-//Verifie si deux mots sont compatibles avec une configuration donee
+//Verifie si deux mots sont compatibles avec une configuration donnee
 bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     int count;
     bool seen[word_size];
     for (int i = 0; i <= word_size - 1; i++){
         seen[i] = false;
+    }
+
+    for (int j = 0; j <= word_size - 1; j++){
+        if ((word[i]==list_word[i]) && ){
+
+        }
     }
 
     for (int j = 0; j <= word_size - 1;j++){
@@ -135,12 +141,17 @@ double entropy(char* word, int current_list_size, char** current_list, int word_
             if ((partition[i]==false) && (is_similar(word, word_state, temp_word, word_size)==true)){
                 occurence++;
                 //somme++;
-                partition[i]=true;
+                //partition[i]=true;
+                printf("%s est compatible avec %s suivant la config %s\n",word,temp_word,word_state);
+            }
+            else{
+                printf("%s n'est pas compatible avec %s suivant la config %s\n",word,temp_word,word_state);
+
             }
         }
         probability=((double)occurence)/current_list_size;
         if (probability != 0.0){
-            word_entropy = word_entropy - probability*(log(probability)/log(2));
+            word_entropy = word_entropy - probability*(log2(probability));
         }
     }
     //free(partition);

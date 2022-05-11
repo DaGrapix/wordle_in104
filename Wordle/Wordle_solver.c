@@ -36,15 +36,9 @@ char* dec_to_ternary(int number, int word_size){
 //Verifie si deux mots sont compatibles avec une configuration donnee
 bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     int count;
-    bool seen[word_size];
+    bool seen[word_size+1];
     for (int i = 0; i <= word_size - 1; i++){
         seen[i] = false;
-    }
-
-    for (int j = 0; j <= word_size - 1; j++){
-        if ((word[i]==list_word[i]) && ){
-
-        }
     }
 
     for (int j = 0; j <= word_size - 1;j++){
@@ -73,9 +67,7 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
                         return false;
                     }
                 }
-        
             }
-            
         }
     }
 
@@ -92,37 +84,11 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     }
 }
 
-/*
-double entropy(char* word, int current_list_size, char** current_list, int word_size){
-    int occurence;
-    double probability;
-    double word_entropy = 0;
-    char *temp_word;
-    //double test;
-    for (int j = 0; j <= pow(3, word_size)-1; j++){
-        occurence = 0;
-        probability = 0;
-        char* word_state = dec_to_ternary(j, word_size);
-        for (int i = 0; i <= current_list_size - 1; i++){
-            temp_word=current_list[i];
-            if (is_similar(word, word_state, temp_word, word_size)==true){
-                occurence++;
-            }
-        }
-        probability=((double)occurence)/current_list_size;
-        //test = log(1/probability)/log(2);
-        if (probability != 0.0){
-            word_entropy = word_entropy + probability*(log(1/probability)/log(2));
-        }
-    }
-    return(word_entropy);
-}
-*/
-
-
 //Problemes....
+//Calcul de l'entropie d'un mot
 double entropy(char* word, int current_list_size, char** current_list, int word_size){
-    //Liste qui verifie si le mot que l'on compare a deja ete compare positivement
+    //  Liste qui verifie si la comparaison entre 2 mots a deja ete effectuee avec une configuration precedente.
+    //  Ceci permet de forcer la sommation a 1 de la probabilite.
     bool partition[current_list_size];
     for (int i = 0; i <= current_list_size - 1; i++){
             partition[i] = false;
@@ -135,18 +101,19 @@ double entropy(char* word, int current_list_size, char** current_list, int word_
     for (int j = 0; j <= pow(3, word_size)-1; j++){
         occurence = 0;
         probability = 0;
+        //Configuration d'indice j
         char* word_state = dec_to_ternary(j, word_size);
+        //On boucle sur tous les mots de la liste des mots possibles
         for (int i = 0; i <= current_list_size - 1; i++){
             temp_word=current_list[i];
             if ((partition[i]==false) && (is_similar(word, word_state, temp_word, word_size)==true)){
                 occurence++;
                 //somme++;
-                //partition[i]=true;
-                printf("%s est compatible avec %s suivant la config %s\n",word,temp_word,word_state);
+                partition[i]=true;
+                //printf("%s est compatible avec %s suivant la config %s\n",word,temp_word,word_state);
             }
             else{
-                printf("%s n'est pas compatible avec %s suivant la config %s\n",word,temp_word,word_state);
-
+                //printf("%s n'est pas compatible avec %s suivant la config %s\n",word,temp_word,word_state);
             }
         }
         probability=((double)occurence)/current_list_size;
@@ -178,9 +145,7 @@ char* best_word(int word_size, char** list, int list_size, char** current_list, 
     char *best_guess = malloc((word_size+1)*sizeof(char));
     strcpy(best_guess, list[0]);
     for (int i = 0; i<= list_size - 1; i++){
-        
         //printf("%s  :  %f\n", list[i], entropy_list[i]);
-
         if (entropy_list[i] > max_entropy){
             max_entropy = entropy_list[i];
             strcpy(best_guess, list[i]);
@@ -196,3 +161,41 @@ char* naive_solver(int word_size, char** current_list, int current_list_size){
     best_guess = random_word(current_list, current_list_size);
     return(best_guess);
 }
+
+
+
+
+
+
+
+
+
+
+//////////            POUBELLE            //////////
+
+/*
+double entropy(char* word, int current_list_size, char** current_list, int word_size){
+    int occurence;
+    double probability;
+    double word_entropy = 0;
+    char *temp_word;
+    //double test;
+    for (int j = 0; j <= pow(3, word_size)-1; j++){
+        occurence = 0;
+        probability = 0;
+        char* word_state = dec_to_ternary(j, word_size);
+        for (int i = 0; i <= current_list_size - 1; i++){
+            temp_word=current_list[i];
+            if (is_similar(word, word_state, temp_word, word_size)==true){
+                occurence++;
+            }
+        }
+        probability=((double)occurence)/current_list_size;
+        //test = log(1/probability)/log(2);
+        if (probability != 0.0){
+            word_entropy = word_entropy + probability*(log(1/probability)/log(2));
+        }
+    }
+    return(word_entropy);
+}
+*/

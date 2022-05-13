@@ -22,11 +22,11 @@ char* dec_to_ternary(int number, int word_size){
         }
         power--;
         if (2*pow(3, power) <= remainder){
-            configuration[power] = 'O';
+            configuration[word_size-power-1] = 'O';
             remainder = remainder - 2*pow(3, power);
         }
         else{
-            configuration[power] = 'Z';
+            configuration[word_size-power-1] = 'Z';
             remainder = remainder - pow(3, power);
         }
     }

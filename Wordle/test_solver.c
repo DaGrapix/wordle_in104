@@ -19,7 +19,7 @@ int main(){
         printf("%s\n", configuration);
     }
     */
-
+    
     
     srand(time(NULL));
     //      CHOIX DU DICTIONNAIRE       //
@@ -38,14 +38,15 @@ int main(){
     //Liste de tous les mots de word_size lettres
     char** list = read_dico(dico_name, &size, word_size);
 
+    /*
     //Affichage des entropies de chaque mot du dico
     for (int i = 0; i <= size - 1; i ++){
        printf("%s   :   %f\n", list[i],entropy(list[i], size, list, word_size));
     }
+    */
+    char* bestWord = best_word(word_size, list, size, list, size);
 
-
-
-
+    printf("%s", bestWord);
 
 
 

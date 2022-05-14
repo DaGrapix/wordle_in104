@@ -40,25 +40,25 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
     for (int i = 0; i <= word_size - 1; i++){
         seen[i] = false;
     }
-
+    //Test les verts : O
     for (int i = 0; i <= word_size - 1;i++){
         if(word_state[i]=='O'){
             if(word[i]==list_word[i]){
-                seen[i]=1;
+                seen[i]=true;
             }
             else{
                 return false;
             }
         }
     }
-
+    //Test les jaunes : Z
     for (int i = 0; i <= word_size - 1;i++){
         if(word_state[i]=='Z'){
             count=0;
             for(int j= 0;j <= word_size - 1; j++){
                 
                 if(word[i]==list_word[j] && i!=j){
-                    seen[j]=1;
+                    seen[j]=true;
                 }
                 else{
                     count++;
@@ -71,11 +71,12 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
         }
     }
 
+   //Test les gris : X
     for (int i = 0; i <= word_size - 1;i++){
         if(word_state[i]=='X'){
                 for(int j= 0;j <= word_size - 1; j++){
-                    //if(word[i]==list_word[j] && seen[i]==0 && seen[j]==0)
-                    if(word[j]==list_word[j] && seen[i]==0 && seen[j]==0){
+                    //if(word[j]==list_word[j] && seen[i]==false && seen[j]==false)
+                    if(word[j]==list_word[j] && seen[i]==false && seen[j]==false){
                         return(false);
                     }
 

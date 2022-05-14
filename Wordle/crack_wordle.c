@@ -16,7 +16,7 @@ void dico_resizer(char* word, int word_size,char* word_state, char** current_lis
     char** similar_list = malloc(((*p_current_list_size) + 1)*sizeof(char*));
     int j = 0;
     for (int i = 0; i <= *p_current_list_size - 1; i++){
-        if (is_similar(word, word_state, current_list[i], word_size)){
+        if (is_similar(word, word_state, current_list[i], word_size) && (strcmp(word, current_list[i])!=0)){
             char* buffer = malloc((word_size+1)*sizeof(char));
             strcpy(buffer, current_list[i]);
             similar_list[j] = buffer;
@@ -33,7 +33,12 @@ void dico_resizer(char* word, int word_size,char* word_state, char** current_lis
     if (j < *p_current_list_size - 1){
         current_list[j+1]=NULL;
     }
+
     *p_current_list_size = j + 1;
+
+    if (current_list[0]==NULL){
+        *p_current_list_size=1;
+    }    
 }
 
 //Verifie si une configuration est valide
@@ -119,12 +124,7 @@ int main(){
         //char* very_best_word = best_word(word_size, list, size, current_list, current_list_size);
         //char* very_best_word = naive_solver(word_size, current_list, current_list_size);
         char* very_best_word = best_word(word_size, current_list, current_list_size, current_list, current_list_size);
-        
-        if ((strcmp(very_best_word, old_word)==0) && current_list_size>1){
-            very_best_word = naive_solver(word_size, current_list, current_list_size);
-        }
 
-        strcpy(old_word, very_best_word);
         printf("Le meilleur mot est %s\n", very_best_word);
 
         printf("\n\n\n");

@@ -12,9 +12,9 @@
 #include "Wordle_solver.h"
 
 int main(){
-    char list_word[6]="PARIS";
-    char word[6]="RREEP";
-    char arrangement[6]="ZXXXZ";
+    char list_word[6]="EMIAS";
+    char word[6]="EMIAI";
+    char arrangement[6]="OOOXX";
     bool OK = is_similar(word,arrangement,list_word,5);
     printf("%d\n", OK);
 }

@@ -71,7 +71,8 @@ int main(){
         printf("#####  TOUR %d  #####\n", tour_counter);
         scanf("%s", user_word);
         if (strcmp(user_word, game_word)==0){
-            printf("C'est gagné!\n\n");
+            printf("C'est gagné!\n");
+            printf("\\(ᵔᵕᵔ)/\n\n");
             return(0);
         }
         else if (strlen(user_word)!=word_length){
@@ -87,6 +88,7 @@ int main(){
         }
     }
 
-    printf("C'est perdu!, le mot etait\n%s\n\n", game_word);
+    printf("C'est perdu!, le mot etait\n%s", game_word);
+    printf("¯\\_(⊙︿⊙)_/¯\n\n");
     return(0);
 }

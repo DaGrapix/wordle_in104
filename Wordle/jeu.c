@@ -49,13 +49,14 @@ int main(){
 
     srand(time(NULL));
     char dico_name[8]="ods4.txt";
-    //char dico_name[10]="french.txt";
-
+    //char dico_name[16]="french.txt";
+    //char dico_name[32]="petit_dico.txt";
+    //char dico_name[32] = "dictionnaire_frequence.txt";
     
     int size;
     char** list = read_dico(dico_name, &size, word_length);
 
-    char* game_word=random_word(list, size);
+    char* game_word = random_word(list, size);
 
     int tour_counter = 0;
     bool gagne = false;
@@ -74,7 +75,7 @@ int main(){
             return(0);
         }
         else if (strlen(user_word)!=word_length){
-            printf("Pas le bon nombre de lettres, Reessaye!\n\n");
+            printf("Pas le bon nombre de lettres, Reessaie!\n\n");
         }
         else if (find_word_dicho(list, user_word, 0, size-1)==false){
             printf("Ce n'est pas un mot du dico, Reessaie!\n\n");

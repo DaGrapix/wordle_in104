@@ -11,28 +11,32 @@
 
 #include "Wordle_solver.h"
 
-//Troncage de la liste courante, par adresse
+//Troncage de la liste courante en gardant tous les mots compatibles, passage par adresse
 void dico_resizer(char* word, int word_size,char* word_state, char** current_list, int* p_current_list_size){
-    char** similar_list = malloc((*p_current_list_size+1)*sizeof(char*));
+    char** similar_list = malloc(((*p_current_list_size) + 1)*sizeof(char*));
     int j = 0;
     for (int i = 0; i <= *p_current_list_size - 1; i++){
         if (is_similar(word, word_state, current_list[i], word_size)){
-            strcpy(similar_list[j], current_list[i]);
+            char* buffer = malloc((word_size+1)*sizeof(char));
+            strcpy(buffer, current_list[i]);
+            similar_list[j] = buffer;
             j++;
         }
     }
+    j--;
     for (int i =0; i <= j; i++){
         strcpy(current_list[i], similar_list[i]);
     }
-    for (int i = *p_current_list_size - 1; i >= j + 1; i--){
+    for (int i = *p_current_list_size - 1; i >= j + 2; i--){
         free(current_list[i]);
     }
-    if (j < *p_current_list_size){
+    if (j < *p_current_list_size - 1){
         current_list[j+1]=NULL;
     }
     *p_current_list_size = j + 1;
 }
 
+//Verifie si une configuration est valide
 bool valid_word_state(int word_size, char* word_state){
     for (int i = 0; i <= word_size - 1; i++){
         if ((word_state[i]!='O') && (word_state[i]!='Z') && (word_state[i]!='X')){
@@ -64,6 +68,8 @@ int main(){
 
     srand(time(NULL));
     char dico_name[8]="ods4.txt";
+    //char dico_name[32]="petit_dico.txt";
+    //char dico_name[32] = "dictionnaire_frequence.txt";
 
 
     int size;
@@ -74,18 +80,66 @@ int main(){
     int tour_counter = 0;
     bool gagne = false;
     char user_word[2*size+1];
+    char word_state[2*size+1];
+    char* old_word = malloc((size+1)*sizeof(char));
 
     while (tour_counter<(nb_tour) && !gagne){
         printf("#####  TOUR %d  #####\n", tour_counter);
+
+        //Lecture du mot
+        printf("Quel mot as tu utilisé?\n");
         scanf("%s", user_word);
+        while ((strlen(user_word)!=word_size) || (find_word_dicho(list, user_word, 0, size-1)==false)){
+            if (strlen(user_word)!=word_size){
+                printf("Pas le bon nombre de lettres, Reessaie!\n\n");
+            }
+            else{
+                printf("Ce n'est pas un mot du dico, Reessaie!\n\n");
+            }
+            scanf("%s", user_word);
+        }
+
+        printf("\n");
+
+        //Lecture de la configuration
+        printf("Quel est la configuration associée à ce mot?\n");
         scanf("%s", word_state);
-        dico_resizer(user_word, word_state, current_list, current_list_size);
-        char* very_best_word = best_word(word_size, list, list_size, current_list, current_list_size);
-        printf("Le meilleur mot est %s", very_best_word);
+        while ((strlen(word_state)!=word_size) || (valid_word_state(word_size, word_state)==false)){
+            if (strlen(word_state)!=word_size){
+                printf("Pas le bon nombre de lettres, Reessaie!\n\n");
+            }
+            else{
+                printf("Ce n'est pas une configuration valide, Reessaie!\n\n");
+            }
+            scanf("%s", word_state);
+        }
+        
+        printf("\n");
+        dico_resizer(user_word, word_size,word_state, current_list, &current_list_size);
+        //char* very_best_word = best_word(word_size, list, size, current_list, current_list_size);
+        //char* very_best_word = naive_solver(word_size, current_list, current_list_size);
+        char* very_best_word = best_word(word_size, current_list, current_list_size, current_list, current_list_size);
+        
+        if ((strcmp(very_best_word, old_word)==0) && current_list_size>1){
+            very_best_word = naive_solver(word_size, current_list, current_list_size);
+        }
+
+        strcpy(old_word, very_best_word);
+        printf("Le meilleur mot est %s\n", very_best_word);
+
+        printf("\n\n\n");
 
         if (current_list_size==1){
-            gagne=1;
-            printf("Victoire en %d tours", tour_counter);
+            gagne=true;
+            printf("Victoire en %d tour(s)!\n", tour_counter+1);
+            printf("\\(ᵔᵕᵔ)/\n");
         }
+        tour_counter++;
+    }
+
+    if (!gagne){
+        printf("C'est perdu!\n");
+        printf("¯\\_(⊙︿⊙)_/¯\n\n");
+    }
 
 }

@@ -52,6 +52,7 @@ bool valid_word_state(int word_size, char* word_state){
 }
 
 int main(){
+    printf("\n###############  Wordle Solver  ###############\n\n");
     int nb_tour;
     int word_size;
 
@@ -82,11 +83,17 @@ int main(){
     char** list = read_dico(dico_name, &size, word_size);
     char** current_list = read_dico(dico_name, &current_list_size, word_size);
 
-    int tour_counter = 0;
+    int tour_counter = 1;
     bool gagne = false;
-    char user_word[2*size+1];
-    char word_state[2*size+1];
+    char user_word[2*word_size+1];
+    char word_state[2*word_size+1];
     char* old_word = malloc((size+1)*sizeof(char));
+    char win_comb[word_size+1];
+    for (int i = 0; i <= word_size-1; i++){
+        win_comb[i]='O';
+    }
+    win_comb[word_size]='\0';
+    //printf("%s\n", win_comb);
 
     while (tour_counter<(nb_tour) && !gagne){
         printf("#####  TOUR %d  #####\n", tour_counter);
@@ -118,7 +125,11 @@ int main(){
             }
             scanf("%s", word_state);
         }
-        
+        if (strcmp(word_state,win_comb)==0){
+            printf("Victoire en %d tour(s)!\n", tour_counter);
+            printf("\\(ᵔᵕᵔ)/\n");
+            return(0);
+        }
         printf("\n");
         dico_resizer(user_word, word_size,word_state, current_list, &current_list_size);
         //char* very_best_word = best_word(word_size, list, size, current_list, current_list_size);
@@ -142,4 +153,5 @@ int main(){
         printf("¯\\_(⊙︿⊙)_/¯\n\n");
     }
 
+    return(0);
 }

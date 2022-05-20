@@ -1,4 +1,4 @@
-Calcul du meilleur premier coup (TARES):
+Calcul du meilleur premier coup:
 gcc meilleur_mot.c random_word.c Wordle_solver.c load_dic.c word_compare.c -lm
 
 Jeu Wordle:

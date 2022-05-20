@@ -58,7 +58,7 @@ int main(){
 
     char* game_word = random_word(list, size);
 
-    int tour_counter = 0;
+    int tour_counter = 1;
     bool gagne = false;
     char user_word[2*size+1];
 

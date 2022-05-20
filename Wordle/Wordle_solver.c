@@ -139,7 +139,7 @@ char* best_word(int word_size, char** list, int list_size, char** current_list, 
     for (int i = 0; i<= list_size - 1; i++){
         word = list[i];
         entropy_list[i] = entropy(word, current_list_size, current_list, word_size);
-        printf("%f\n", 100*(float)(i)/list_size);
+        printf("%d %% \n", (int)(100*(float)(i)/list_size));
     }
 
     //On trouve le mot avec la plus grande entropie

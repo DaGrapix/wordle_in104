@@ -79,7 +79,6 @@ bool is_similar(char* word, char* word_state, char* list_word, int word_size){
                     if(word[j]==list_word[j] && seen[i]==false && seen[j]==false){
                         return(false);
                     }
-
                 }
             }
         return true;

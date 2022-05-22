@@ -1,8 +1,0 @@
-Calcul du meilleur premier coup:
-gcc meilleur_mot.c Wordle_solver.c random_word.c load_dic.c word_compare.c -lm
-
-Jeu Wordle:
-gcc jeu.c word_compare.c load_dic.c random_word.c
-
-Solveur du jeu:
-gcc crack_wordle.c word_compare.c load_dic.c random_word.c Wordle_solver.c -lm

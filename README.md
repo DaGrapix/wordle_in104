@@ -1,2 +1,16 @@
 # IN104_WORDLE
-Code de Anthony et Lucas
+Projet de Anthony Kalaydjian et Lucas Duhem
+Ce projet consiste à implémenter une version du jeu Wordle en C, ainsi qu'un solveur de ce jeu.
+
+
+
+////Commandes de complilation////
+
+Jeu Wordle:
+gcc jeu.c word_compare.c load_dic.c random_word.c
+
+Calcul du meilleur premier coup:
+gcc meilleur_mot.c Wordle_solver.c random_word.c load_dic.c word_compare.c -lm
+
+Solveur du jeu:
+gcc crack_wordle.c word_compare.c load_dic.c random_word.c Wordle_solver.c -lm

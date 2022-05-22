@@ -1,5 +1,5 @@
 # IN104_WORDLE
-Projet de Anthony Kalaydjian et Lucas Duhem
+Projet de Anthony Kalaydjian et Lucas Duhem.<br />
 Ce projet consiste à implémenter une version du jeu Wordle en C, ainsi qu'un solveur de ce jeu.
 
 

@@ -1,7 +1,0 @@
-{
-    "C_Cpp.errorSquiggles": "Disabled",
-    "files.associations": {
-        "temps.C": "cpp",
-        "wordle_solver.h": "c"
-    }
-}

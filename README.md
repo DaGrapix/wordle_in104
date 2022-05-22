@@ -1,10 +1,10 @@
-#IN104_WORDLE
+# IN104_WORDLE
 Projet de Anthony Kalaydjian et Lucas Duhem
 Ce projet consiste à implémenter une version du jeu Wordle en C, ainsi qu'un solveur de ce jeu.
 
 
 
-##Commandes de complilation
+## Commandes de complilation
 Pour compiler les différents programmes, placez vous dans le dossier "Wordle" et executez les commades suivates:
 
 *   Jeu Wordle:

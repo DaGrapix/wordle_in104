@@ -25,6 +25,24 @@ int main(){
 
     int nb_tour;
     int word_length;
+    char language[16];
+    char dico_name[16];
+
+    printf("Veux-tu jouer en FRANCAIS ou en ANGLAIS?\n");
+    scanf("%s", language);
+    while((strcmp(language, "FRANCAIS")!=0) && (strcmp(language, "ANGLAIS")!=0)){
+        printf("Tu dois répondre FRANCAIS ou ANGLAIS! Réeessaie!\n");
+        scanf("%s", language);
+    }
+
+    if (strcmp(language, "FRANCAIS")==0){
+        strcpy(dico_name,"french.txt");
+    }
+    else{
+        strcpy(dico_name,"english.txt");
+    }
+
+    printf("\n\n");
 
     printf("En combien de tours veux tu jouer?\n");
     scanf("%d", &nb_tour);
@@ -44,15 +62,12 @@ int main(){
 
     printf("\n\n");
 
-    printf("Jeu en %d tours, pour des mots de %d lettres\n\n", nb_tour, word_length);
+    printf("Jeu en %d tours, pour des mots de %d lettres en %s\n\n", nb_tour, word_length, language);
 
 
     srand(time(NULL));
-    char dico_name[8]="ods4.txt";
-    //char dico_name[16]="french.txt";
-    //char dico_name[32]="petit_dico.txt";
-    //char dico_name[32] = "dictionnaire_frequence.txt";
-    
+
+
     int size;
     char** list = read_dico(dico_name, &size, word_length);
 
@@ -62,12 +77,7 @@ int main(){
     bool gagne = false;
     char user_word[2*size+1];
 
-    //TEST
-    //printf("%s\n", game_word);
-
-    //TEST
-    //game_word="NOEME";
-    while (tour_counter<(nb_tour + 1) && !gagne){
+    while ((tour_counter<=nb_tour) && !gagne){
         printf("#####  TOUR %d  #####\n", tour_counter);
         scanf("%s", user_word);
         if (strcmp(user_word, game_word)==0){
@@ -88,7 +98,7 @@ int main(){
         }
     }
 
-    printf("C'est perdu!, le mot etait\n%s", game_word);
+    printf("C'est perdu!, le mot etait\n%s\n", game_word);
     printf("¯\\_(⊙︿⊙)_/¯\n\n");
     return(0);
 }

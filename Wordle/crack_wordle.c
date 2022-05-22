@@ -52,10 +52,35 @@ bool valid_word_state(int word_size, char* word_state){
 }
 
 int main(){
-    printf("\n###############  Wordle Solver  ###############\n\n");
+    printf("\n###############################  Wordle Solver  ###############################\n\n");
+    printf("Bienvenu sur le solveur Wordle.\n");
+    printf("Avant de commencer, lancez le jeu dans un autre terminal et lisez les instructions.\n");
+    printf("Il ne vous reste plus qu'à donner, à chaque tour, le mot que vous avez choisi,\n");
+    printf("suivi par la configuration que le jeu vous a retourné.\n");
+    printf("Ce programme vous fournira alors le meilleur mot à deviner!\n\n\n\n");
     int nb_tour;
     int word_size;
+    char language[16];
+    char dico_name[16];
 
+    //Langue du dictionnaire
+    printf("Veux-tu jouer en FRANCAIS ou en ANGLAIS?\n");
+    scanf("%s", language);
+    while((strcmp(language, "FRANCAIS")!=0) && (strcmp(language, "ANGLAIS")!=0)){
+        printf("Tu dois répondre FRANCAIS ou ANGLAIS! Réeessaie!\n");
+        scanf("%s", language);
+    }
+
+    if (strcmp(language, "FRANCAIS")==0){
+        strcpy(dico_name,"french.txt");
+    }
+    else{
+        strcpy(dico_name,"english.txt");
+    }
+
+    printf("\n\n");
+
+    //Nombre de tous de la partie
     printf("En combien de tours est la partie?\n");
     scanf("%d", &nb_tour);
     while((nb_tour>50) || (nb_tour<=0)){
@@ -64,6 +89,7 @@ int main(){
     }
     printf("\n\n");
 
+    //Nombre de lettres du mot
     printf("Avec combien de lettres joues-tu?\n");
     scanf("%d", &word_size);
     while((word_size>10) || (word_size<=2)){
@@ -73,9 +99,6 @@ int main(){
     printf("\n\n");
 
     srand(time(NULL));
-    char dico_name[8]="ods4.txt";
-    //char dico_name[32]="petit_dico.txt";
-    //char dico_name[32] = "dictionnaire_frequence.txt";
 
 
     int size;
@@ -93,9 +116,9 @@ int main(){
         win_comb[i]='O';
     }
     win_comb[word_size]='\0';
-    //printf("%s\n", win_comb);
 
-    while (tour_counter<(nb_tour) && !gagne){
+
+    while ((tour_counter<=nb_tour) && !gagne){
         printf("#####  TOUR %d  #####\n", tour_counter);
 
         //Lecture du mot

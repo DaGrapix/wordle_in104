@@ -17,14 +17,31 @@ int main(){
 
     //dictionnaire
     //char dico_name[32]="dictionnaire_frequence.txt";
-    char dico_name[32]="ods4.txt";
+    char dico_name[32];
 
+    char language[16];
+
+    printf("Veux-tu jouer en FRANCAIS ou en ANGLAIS?\n");
+    scanf("%s", language);
+    while((strcmp(language, "FRANCAIS")!=0) && (strcmp(language, "ANGLAIS")!=0)){
+        printf("Tu dois répondre FRANCAIS ou ANGLAIS! Réeessaie!\n");
+        scanf("%s", language);
+    }
+
+    if (strcmp(language, "FRANCAIS")==0){
+        strcpy(dico_name,"french.txt");
+    }
+    else{
+        strcpy(dico_name,"english.txt");
+    }
+
+    printf("\n\n");
     //longueur d'un mot
     printf("Combien de lettres comportent les mots du dictionnaire?\n");
     int word_size;
     scanf("%d", &word_size);
     while ((word_size<=2) || (word_size>10)){
-        printf("Choisis un nombre entre 3 et 50!\n");
+        printf("Choisis un nombre entre 3 et 10!\n");
         scanf("%d", &word_size);
     }
     

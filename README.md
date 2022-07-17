@@ -5,7 +5,7 @@ Ce projet consiste à implémenter une version du jeu Wordle en C, ainsi qu'un s
 
 
 ## Commandes de complilation
-Pour compiler les différents programmes, placez vous dans le dossier "Wordle" et executez les commades suivates:
+Pour compiler les différents programmes, placez vous dans le dossier "Wordle" et executez les commades suivantes:
 
 *   **Jeu Wordle:**<br />
     gcc jeu.c word_compare.c load_dic.c random_word.c
